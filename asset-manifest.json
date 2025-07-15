@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/react-login-app/static/js/main.d6d85404.js",
+    "static/js/453.f0ee9a6f.chunk.js": "/react-login-app/static/js/453.f0ee9a6f.chunk.js",
+    "index.html": "/react-login-app/index.html",
+    "main.d6d85404.js.map": "/react-login-app/static/js/main.d6d85404.js.map",
+    "453.f0ee9a6f.chunk.js.map": "/react-login-app/static/js/453.f0ee9a6f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.d6d85404.js"
+  ]
+}
