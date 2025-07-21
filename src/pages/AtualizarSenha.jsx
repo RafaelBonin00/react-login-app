@@ -3,6 +3,9 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import { Link, useNavigate } from 'react-router-dom';
 
+import SenhaRequirementos from '../componentes/SenhaRequirementos';
+import InputCadastro from '../componentes/InputCadastro';
+
 export default function AtualizarSenha() {
   const [form, setForm] = useState({ password: '', confirmPassword: '' });
   const [passwordChecks, setPasswordChecks] = useState({
@@ -36,6 +39,13 @@ export default function AtualizarSenha() {
     };
   }, []);
 
+  const senhaValida =
+    passwordChecks.length &&
+    passwordChecks.uppercase &&
+    passwordChecks.number &&
+    passwordChecks.special &&
+    form.password === form.confirmPassword;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     const updatedForm = { ...form, [name]: value };
@@ -51,12 +61,7 @@ export default function AtualizarSenha() {
     }
   };
 
-  const senhaValida =
-    passwordChecks.length &&
-    passwordChecks.uppercase &&
-    passwordChecks.number &&
-    passwordChecks.special &&
-    form.password === form.confirmPassword;
+  
 
   const handleAtualizarSenha = async (e) => {
     e.preventDefault();
@@ -87,53 +92,13 @@ export default function AtualizarSenha() {
       <Link to="/noticias">Noticias</Link>
       <h2>Atualizar Senha</h2>
       <form onSubmit={handleAtualizarSenha}>
-        <input
-          type="password"
-          name="password"
-          placeholder="Nova senha"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirmar nova senha"
-          value={form.confirmPassword}
-          onChange={handleChange}
-          required
-        />
+
+        <InputCadastro name="password" type="password" placeholder="Senha" value={form.password} onChange={handleChange} />
+        <InputCadastro name="confirmPassword" type="password" placeholder="Confirmar senha" value={form.confirmPassword} onChange={handleChange}/>
         <button type="submit">Atualizar</button>
       </form>
 
-      {/* Requisitos da senha */}
-      <div style={{ fontSize: '0.9em', marginTop: '10px' }}>
-        <p>Requisitos da senha:</p>
-        <ul>
-          <li style={{ color: passwordChecks.length ? 'green' : 'red' }}>
-            Mínimo de 8 caracteres
-          </li>
-          <li style={{ color: passwordChecks.uppercase ? 'green' : 'red' }}>
-            Pelo menos uma letra maiúscula
-          </li>
-          <li style={{ color: passwordChecks.number ? 'green' : 'red' }}>
-            Pelo menos um número
-          </li>
-          <li style={{ color: passwordChecks.special ? 'green' : 'red' }}>
-            Pelo menos um caractere especial
-          </li>
-          <li
-            style={{
-              color:
-                form.password && form.confirmPassword && form.password === form.confirmPassword
-                  ? 'green'
-                  : 'red',
-            }}
-          >
-            Senha e confirmação iguais
-          </li>
-        </ul>
-      </div>
+      <SenhaRequirementos checks={passwordChecks} password={form.password} confirmPassword={form.confirmPassword}/>
 
       {/* Mensagens */}
       {erro && <p style={{ color: 'red' }}>{erro}</p>}

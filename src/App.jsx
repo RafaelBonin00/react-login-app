@@ -1,6 +1,7 @@
 // src/App.jsx
+import Header from './componentes/Header';
 import Rotas from './Rota/rotas';
-import Header from './Container/Header';
+
 function App() {
   return (
     <>

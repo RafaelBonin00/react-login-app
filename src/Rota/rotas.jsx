@@ -5,10 +5,9 @@ import Login from '../pages/Login';
 import Cadastro from '../pages/Cadastro';
 import Noticias from '../pages/Noticias';
 import Perfil from '../pages/Perfil';
-import PrivateRoute from '../PrivateRoute';
-import PublicRoute from '../PublicRoute';
 import RedefinirSenha from '../pages/RedefinirSenha';
 import AtualizarSenha from '../pages/AtualizarSenha';
+import AuthRoute from '../AuthRoute';
 
 export default function Rotas() {
   return (
@@ -20,9 +19,9 @@ export default function Rotas() {
       <Route
         path="/perfil"
         element={
-          <PrivateRoute>
+          <AuthRoute type="private">
             <Perfil />
-          </PrivateRoute>
+          </AuthRoute>
         }
       />
 
@@ -30,34 +29,34 @@ export default function Rotas() {
       <Route
         path="/login"
         element={
-          <PublicRoute>
+          <AuthRoute type="public">
             <Login />
-          </PublicRoute>
+          </AuthRoute>
         }
       />
       <Route
         path="/cadastro"
         element={
-          <PublicRoute>
+          <AuthRoute type="public">
             <Cadastro />
-          </PublicRoute>
+          </AuthRoute>
         }
         
       />
       <Route
         path="/redefinir-senha"
         element={
-          <PublicRoute>
+          <AuthRoute type="public">
             <RedefinirSenha />
-          </PublicRoute>
+          </AuthRoute>
         }
       />
       <Route
         path="/atualizar-senha"
         element={
-          <PrivateRoute>
+          <AuthRoute type="private">
             <AtualizarSenha />
-          </PrivateRoute>
+          </AuthRoute>
         }
       />
 
